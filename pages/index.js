@@ -15,7 +15,6 @@ export default function Home({ allphotos }) {
     setPhoto(singlePhoto[random]);
   };
 
-  console.log(photo);
   return (
     <>
       <Head>
@@ -46,15 +45,27 @@ export default function Home({ allphotos }) {
               </button> */}
             </div>
           </div>
-          <div className="relative h-2/3 w-2/3 mx-auto mt-12">
-            <Image
-              className="rounded-xl shadow-2xl"
-              src={photo}
-              fill
-              objectFit="cover"
-              alt="pixabay"
-            />
-          </div>
+          {photo ? (
+            <div className="relative h-2/3 w-2/3 mx-auto mt-12">
+              <Image
+                className="rounded-xl shadow-2xl"
+                src={photo}
+                fill
+                objectFit="cover"
+                alt="pixabay"
+              />
+            </div>
+          ) : (
+            <div className="relative h-2/3 w-2/3 mx-auto mt-12">
+              <Image
+                className="rounded-xl shadow-2xl"
+                src="https://cdn.pixabay.com/photo/2023/01/09/16/46/goat-7707878_1280.jpg"
+                fill
+                objectFit="cover"
+                alt="pixabay"
+              />
+            </div>
+          )}
         </div>
       </main>
     </>
@@ -63,7 +74,7 @@ export default function Home({ allphotos }) {
 
 export const getStaticProps = async () => {
   const res = await fetch(
-    "https://pixabay.com/api/?key=32921114-8ff93b49854b9d71b2e624486&q=Illustration&image_type=photo?per_page=200"
+    "https://pixabay.com/api/?key=32921114-8ff93b49854b9d71b2e624486&q=girl&image_type=photo?per_page=200"
   );
   const data = await res.json();
   const allphotos = data.hits;
